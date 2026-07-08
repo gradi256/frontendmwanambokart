@@ -1,6 +1,6 @@
-import { ArtworktypeForm } from "../../components/artworktype/ArtworktypeForm"
+// import { ArtworktypeForm } from "../../components/artworktype/ArtworktypeForm"
 import { ArtworktypeList } from "../../components/artworktype/ArtworktypeList"
-import { ArtworkypeBar } from "../../components/artworktype/ArtworkypeBar"
+// import { ArtworkypeBar } from "../../components/artworktype/ArtworkypeBar"
 
 export const ArtworktypePage = () => {
   return (
@@ -15,8 +15,8 @@ export const ArtworktypePage = () => {
       </div>
 
       <div className="mt-10">
-        <ArtworkypeBar />
-        <ArtworktypeForm />
+        {/* <ArtworkypeBar />
+        <ArtworktypeForm /> */}
         <ArtworktypeList />
       </div>
     </div>

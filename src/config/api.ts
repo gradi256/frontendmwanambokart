@@ -1,1 +1,1 @@
-export const API_URL = "https://mwanambokart-officiel-1.onrender.com/api/"
+export const API_URL = "https://mwanambokart-officiel-1.onrender.com/api"
