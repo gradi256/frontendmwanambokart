@@ -1,5 +1,5 @@
-import { Header } from "@/features/admin/Header"
-import { Sidebar } from "@/features/admin/Sidebar"
+import { Header } from "@/features/admin/components/Header"
+import { Sidebar } from "@/features/admin/components/Sidebar"
 import { Outlet } from "react-router-dom"
 
 export const AdminLayout = () => {
