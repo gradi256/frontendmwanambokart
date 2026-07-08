@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import { AdminLayout } from "./layouts/AdminLayout"
-import { DashboardPage } from "./pages/admin/DashboardPage"
-import { ArtworktypePage } from "./pages/admin/ArtworktypePage"
+import { DashboardPage } from "./features/admin/pages/admin/DashboardPage"
+import { ArtworktypePage } from "./features/admin/pages/admin/ArtworktypePage"
 
 export const router = createBrowserRouter([
   // ROUTES ADMIN
