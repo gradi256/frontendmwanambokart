@@ -6,7 +6,7 @@ export const AdminLayout = () => {
   return (
     <div>
       <Sidebar />
-      <section>
+      <section className="flex w-full flex-col">
         <Header />
         <main>
           <Outlet />
