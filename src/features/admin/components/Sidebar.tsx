@@ -1,4 +1,4 @@
-import { LayoutDashboard, LogOut } from "lucide-react"
+import { LayoutDashboard, LogOut, Palette } from "lucide-react"
 import { SidebarNavlink } from "./SidebarNavlink"
 import { Button } from "@/components/ui/button"
 
@@ -8,6 +8,12 @@ const NAV_ITEMS = [
     title: "Tableau de bord",
     href: "/admin",
     icon: <LayoutDashboard className="h-5 w-5" />,
+  },
+  {
+    id: 2,
+    title: "Type d'œuvre",
+    href: "/admin/artworktype",
+    icon: <Palette className="h-5 w-5" />,
   },
 ]
 
@@ -27,7 +33,7 @@ export const Sidebar = () => {
       </div>
 
       {/* menu de navigation dans admin */}
-      <nav className="mt-5 flex flex-col gap-6 px-4">
+      <nav className="mt-5 flex flex-col gap-3 px-4">
         {NAV_ITEMS.map((item) => (
           <SidebarNavlink
             id={item.id}
