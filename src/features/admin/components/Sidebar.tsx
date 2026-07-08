@@ -1,5 +1,6 @@
-import { LayoutDashboard } from "lucide-react"
+import { LayoutDashboard, LogOut } from "lucide-react"
 import { SidebarNavlink } from "./SidebarNavlink"
+import { Button } from "@/components/ui/button"
 
 const NAV_ITEMS = [
   {
@@ -26,7 +27,7 @@ export const Sidebar = () => {
       </div>
 
       {/* menu de navigation dans admin */}
-      <nav className="flex flex-col gap-6 px-8 mt-5">
+      <nav className="mt-5 flex flex-col gap-6 px-4">
         {NAV_ITEMS.map((item) => (
           <SidebarNavlink
             id={item.id}
@@ -36,6 +37,14 @@ export const Sidebar = () => {
           />
         ))}
       </nav>
+
+      {/* bouton de dédconnexion */}
+      <div className="fixed bottom-0 flex h-20 w-64 items-center justify-center border-t border-sidebar-border">
+        <Button className="w-50" size={'lg'} variant={"destructive"}>
+          <LogOut />
+          Déconnexion
+        </Button>
+      </div>
     </aside>
   )
 }
