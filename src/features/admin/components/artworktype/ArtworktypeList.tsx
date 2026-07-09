@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { getArtworktype } from "../../services/artworktype/GetArtworktype"
 import { TriangleAlert } from "lucide-react"
 import { toast } from "sonner"
-import { ArtiworktypeSpinner } from "./ArtiworktypeSpinner"
+import { Spinner0 } from "./Spinner"
 import { DataTable } from "@/components/ui/data-table"
 import { artworktypeColumns } from "./ArtworktypeColumns"
 import { DeleteArtworktype } from "../../services/artworktype/DeleteArtworktype"
@@ -46,7 +46,7 @@ export const ArtworktypeList = () => {
         </div>
       )}
       {isError && toast.error(error.message)}
-      {isLoading && <ArtiworktypeSpinner />}
+      {isLoading && <Spinner0 />}
 
       <div>
         {!isLoading && !isError && artworktype && (

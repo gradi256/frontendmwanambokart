@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/empty"
 import { Spinner } from "@/components/ui/spinner"
 
-export const ArtiworktypeSpinner = () => {
+export const Spinner0 = () => {
   return (
     <Empty>
       <EmptyHeader>

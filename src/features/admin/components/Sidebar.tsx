@@ -11,6 +11,12 @@ const NAV_ITEMS = [
   },
   {
     id: 2,
+    title: "Utilisateurs",
+    href: "/admin/users",
+    icon: <Palette className="h-5 w-5" />,
+  },
+  {
+    id: 2,
     title: "Type d'œuvre",
     href: "/admin/artworktype",
     icon: <Palette className="h-5 w-5" />,
@@ -46,7 +52,7 @@ export const Sidebar = () => {
 
       {/* bouton de dédconnexion */}
       <div className="fixed bottom-0 flex h-20 w-64 items-center justify-center border-t border-sidebar-border">
-        <Button className="w-50" size={'lg'} variant={"destructive"}>
+        <Button className="w-50" size={"lg"} variant={"destructive"}>
           <LogOut />
           Déconnexion
         </Button>
