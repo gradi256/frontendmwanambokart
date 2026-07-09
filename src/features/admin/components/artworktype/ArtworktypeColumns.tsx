@@ -1,7 +1,7 @@
 import { type ColumnDef } from "@tanstack/react-table"
 import type { ArtworktypeType } from "../../types/ArtworktypeType"
 
-import { MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -20,7 +20,17 @@ export const artworktypeColumns: ColumnDef<ArtworktypeType>[] = [
   },
   {
     accessorKey: "name",
-    header: "Nom de la catégorie",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Nom de la catégorie
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
     accessorKey: "description",
