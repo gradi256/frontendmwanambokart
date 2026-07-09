@@ -1,12 +1,12 @@
-import { CustomerColumns } from "./CustomerColums"
 import { useQuery } from "@tanstack/react-query"
-import { GetCustomer } from "../../services/user/GetCustomer"
 import { TriangleAlert } from "lucide-react"
 import { Spinner0 } from "../artworktype/Spinner"
 import { toast } from "sonner"
 import { DataTable } from "./data-table"
+import { GetArtist } from "../../services/user/GetArtist"
+import { ArtistColumns } from "./ArtistColumns"
 
-export const CustomerList = () => {
+export const ArtistList = () => {
   const {
     data: users,
     isLoading,
@@ -14,7 +14,7 @@ export const CustomerList = () => {
     error,
   } = useQuery({
     queryKey: ["users"],
-    queryFn: GetCustomer,
+    queryFn: GetArtist,
   })
   return (
     <div>
@@ -29,7 +29,7 @@ export const CustomerList = () => {
 
       <div>
         {!isLoading && !isError && users && (
-          <DataTable columns={CustomerColumns} data={users} />
+          <DataTable columns={ArtistColumns} data={users} />
         )}
       </div>
     </div>
