@@ -4,6 +4,7 @@ import axios from "axios"
 export const getUsers = async () => {
   try {
     const { data } = await axios.get(`${API_URL}/user`)
+    console.log('users', data)
     return data
   } catch (error) {
     console.error("🚨 Erreur attrapée pendant le fetch :", error)
