@@ -1,10 +1,7 @@
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
-import { PostArtworktype } from "../../services/artworktype/PostArtworktype"
-import type { ArtworktypeInput } from "../../types/ArtworktypeType"
+import { UpdataArtworktype } from "../../services/artworktype/PutArtworktype"
 import { toast } from "sonner"
+import { useState } from "react"
 import {
   Dialog,
   DialogClose,
@@ -16,47 +13,56 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Field, FieldGroup } from "@/components/ui/field"
+import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
-import { Plus } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import type { ArtworktypeType } from "../../types/ArtworktypeType"
 
-export const ArtworktypeForm = () => {
-  const [open, setOpen] = useState(false)
-  const [name, setName] = useState("")
-  const [description, setDescription] = useState("")
+interface ArtworktypeUpdateFormProps {
+  artworktype: ArtworktypeType
+}
 
+export const ArtworktypeUpdateForm = ({
+  artworktype,
+}: ArtworktypeUpdateFormProps) => {
   const queryClient = useQueryClient()
 
+  const [open, setOpen] = useState(false)
+  const [name, setName] = useState(artworktype.name)
+  const [description, setDescription] = useState(artworktype.description)
+
   const { mutate, isPending } = useMutation({
-    mutationFn: (newData: ArtworktypeInput) => PostArtworktype(newData),
+    mutationFn: UpdataArtworktype,
     onSuccess: () => {
-      toast.success("Type d'œuvre crée")
-      setName("")
-      setDescription("")
+      toast.success("Profil mis à jour avec succès !")
+      queryClient.invalidateQueries({
+        queryKey: ["artworktype"],
+      })
       setOpen(false)
-      queryClient.invalidateQueries({ queryKey: ["artworktype"] })
     },
-    onError: (err) => {
-      toast.error(err.message)
+    onError: (error) => {
+      console.error("Erreur lors de la modification :", error)
+      toast.error("Erreur lors de la modification :")
     },
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
 
-    const artworktypeData: ArtworktypeInput = {
+    const formData = {
+      id_type: artworktype.id_type,
       name: name,
       description: description,
+      img: "",
     }
 
-    mutate(artworktypeData)
+    mutate(formData)
   }
   return (
     <div className="w-20">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button>
-            Ajouter un type d'œuvre <Plus />
-          </Button>
+          <span>Modifier</span>
         </DialogTrigger>
         <DialogContent>
           <form
@@ -64,10 +70,10 @@ export const ArtworktypeForm = () => {
             className="mx-auto flex w-100 flex-col gap-4 rounded-md bg-card p-6"
           >
             <DialogHeader>
-              <DialogTitle>Créer un nouveau type d'œuvre</DialogTitle>
+              <DialogTitle>Modifier le type d'œuvre</DialogTitle>
               <DialogDescription>
-                Ajoutez une nouvelle catégorie pour organiser et classer les
-                œuvres d'art de la plateforme.
+                Mofifier la catégorie pour organiser et classer les œuvres d'art
+                de la plateforme.
               </DialogDescription>
             </DialogHeader>
             <FieldGroup>
@@ -92,7 +98,7 @@ export const ArtworktypeForm = () => {
               <DialogClose className="flex items-center gap-3">
                 <Button variant={"outline"}>Annuler</Button>
                 <Button type="submit">
-                  {isPending ? "En cours ..." : "Créer le type"}
+                  {isPending ? "En cours ..." : "Modifier le type"}
                 </Button>
               </DialogClose>
             </DialogFooter>

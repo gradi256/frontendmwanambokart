@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { getArtworktype } from "../../services/GetArtworktype"
+import { getArtworktype } from "../../services/artworktype/GetArtworktype"
 import { TriangleAlert } from "lucide-react"
 import { toast } from "sonner"
 import { ArtiworktypeSpinner } from "./ArtiworktypeSpinner"
 import { DataTable } from "@/components/ui/data-table"
 import { artworktypeColumns } from "./ArtworktypeColumns"
-import { DeleteArtworktype } from "../../services/DeleteArtworktype"
+import { DeleteArtworktype } from "../../services/artworktype/DeleteArtworktype"
 
 export const ArtworktypeList = () => {
   const queryClient = useQueryClient()

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Checkbox } from "@/components/ui/checkbox"
 import { AlertDialogShow } from "./AlertDialog"
+import { ArtworktypeUpdateForm } from "./ArtworktypeUpdateForm"
 
 export const artworktypeColumns = (
   onDelete: (id: string) => void
@@ -91,7 +92,9 @@ export const artworktypeColumns = (
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Voir plus</DropdownMenuItem>
-            <DropdownMenuItem>Modifier</DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <ArtworktypeUpdateForm artworktype={artworktype} />
+            </DropdownMenuItem>
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <AlertDialogShow
                 onConfirm={() => onDelete(artworktype.id_type)}
