@@ -26,7 +26,7 @@ export const ChoiceComponent = () => {
             </NavLink>
 
             <NavLink
-              to="/auth/auth-register/client"
+              to="/auth/auth-register/resgiter-client"
               className="group relative flex items-start gap-4 p-5 rounded-xl border border-border bg-card lg:bg-card transition-all duration-200 hover:border-accent hover:bg-secondary/30 focus:outline-none focus:ring-2 focus:ring-ring shadow-sm"
             >
               <div className="flex p-3 rounded-lg bg-accent text-accent-foreground group-hover:scale-105 transition-transform duration-200">
