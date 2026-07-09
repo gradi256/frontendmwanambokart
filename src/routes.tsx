@@ -6,6 +6,7 @@ import { UserPage } from "./features/admin/pages/admin/UserPage"
 import { AuthLayout } from "./layouts/AuthLayout"
 import { HomeRegister } from "./features/Auth/pages/HomeRegister"
 import { RegisterClient } from "./features/Auth/pages/RegisterCient"
+import { RegisterArtist } from "./features/Auth/pages/RegisterArtist"
 
 export const router = createBrowserRouter([
   {
@@ -17,9 +18,13 @@ export const router = createBrowserRouter([
         element: <HomeRegister />,
       },
       {
-        path : "/auth/auth-register/resgiter-client",
-        element : <RegisterClient />
-      }
+        path: "/auth/auth-register/resgiter-client",
+        element: <RegisterClient />,
+      },
+      {
+        path: "/auth/auth-register/resgiter-artist",
+        element: <RegisterArtist />,
+      },
     ],
   },
   // ROUTES ADMIN

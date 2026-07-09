@@ -6,7 +6,7 @@ export const ChoiceComponent = () => {
  <div className="space-y-4">
             
             <NavLink
-              to="/auth/auth-register/artisan"
+              to="/auth/auth-register/resgiter-artist"
               className="group relative flex items-start gap-4 p-5 rounded-xl border border-border bg-card lg:bg-card transition-all duration-200 hover:border-primary hover:bg-muted/10 focus:outline-none focus:ring-2 focus:ring-ring shadow-sm"
             >
               <div className="flex p-3 rounded-lg bg-primary text-primary-foreground group-hover:scale-105 transition-transform duration-200">
