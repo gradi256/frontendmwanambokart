@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
 import { getArtworktype } from "../../services/GetArtworktype"
 import type { ArtworktypeType } from "../../types/ArtworktypeType"
-import { Loader2, Palette, TriangleAlert } from "lucide-react"
+import { Palette, TriangleAlert } from "lucide-react"
 import { ArtworktypeBox } from "./ArtworktypeBox"
 import { toast } from "sonner"
+import { ArtiworktypeSpinner } from "./ArtiworktypeSpinner"
 
 export const ArtworktypeList = () => {
   const {
@@ -30,17 +31,10 @@ export const ArtworktypeList = () => {
           </div>
         )}
         {isError && toast.error(error.message)}
-        {isLoading && (
-          <div className="flex h-50 flex-col items-center justify-center gap-2">
-            <Loader2 className="h-10 w-10 animate-spin font-bold text-primary" />
-            <span className="text-sm text-muted-foreground">
-              Chagement des types d'oœuvre en cours...
-            </span>
-          </div>
-        )}
+        {isLoading && <ArtiworktypeSpinner />}
 
         {artworktype?.map((item: ArtworktypeType) => (
-          <div className="flex gap-3 p-4">
+          <div className="flex">
             <ArtworktypeBox
               key={item.id_type}
               img="https://avatars.githubusercontent.com/u/218519586?v=4&size=64"

@@ -16,7 +16,7 @@ export const ArtworktypePage = () => {
 
       <div className="mt-10 flex flex-col gap-10">
          {/* <ArtworkypeBar /> */}
-        <ArtworktypeForm /> 
+        <ArtworktypeForm/> 
         <ArtworktypeList />
       </div>
     </div>

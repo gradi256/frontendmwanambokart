@@ -13,12 +13,12 @@ export const ArtworktypeBox = ({ img, name, description }: ArtworktypeType) => {
         </div>
       </div>
 
-      <div className="flex gap-2 items-center">
+      <div className="flex items-center gap-2">
         <Button variant={"destructive"}>
           <Trash2 />
           supprimer
         </Button>
-        <Button >
+        <Button>
           <Edit />
           Modifier
         </Button>
