@@ -30,6 +30,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { DataTablePagination } from "./DataTablePagination"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -164,7 +165,7 @@ export function DataTable<TData, TValue>({
           {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
 
-        <div className="flex items-center justify-end space-x-2 py-4">
+        {/* <div className="flex items-center justify-end space-x-2 py-4">
           <Button
             variant="outline"
             size="sm"
@@ -181,7 +182,8 @@ export function DataTable<TData, TValue>({
           >
             Next
           </Button>
-        </div>
+        </div> */}
+        <DataTablePagination table={table} />
       </div>
     </div>
   )
