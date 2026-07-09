@@ -19,7 +19,7 @@ export const ArtworktypeList = () => {
 
   return (
     <div>
-      <div className="rounded-md border border-sidebar-border bg-card shadow-accent-foreground">
+      <div>
         <h1 className="flex items-center gap-2 p-4 tracking-tight text-muted-foreground">
           <Palette />
           Types d'œuvres de la galerie
@@ -33,7 +33,7 @@ export const ArtworktypeList = () => {
         {isError && toast.error(error.message)}
         {isLoading && <ArtiworktypeSpinner />}
 
-        <div className="flex">
+        <div>
           <DataTable columns={artworktypeColumns} data={artworktype} />
         </div>
       </div>
