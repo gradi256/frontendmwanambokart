@@ -3,7 +3,7 @@ import { getArtworktype } from "../../services/artworktype/GetArtworktype"
 import { TriangleAlert } from "lucide-react"
 import { toast } from "sonner"
 import { ArtiworktypeSpinner } from "./ArtiworktypeSpinner"
-import { DataTable } from "@/components/ui/data-table"
+import { DataTable } from "@/features/admin/components/artworktype/data-table"
 import { artworktypeColumns } from "./ArtworktypeColumns"
 import { DeleteArtworktype } from "../../services/artworktype/DeleteArtworktype"
 
