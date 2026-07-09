@@ -25,7 +25,7 @@ export const ArtworktypeList = () => {
     onSuccess: () => {
       toast.success("Type d'œuvre supprimé avec succès !")
       // Rafraîchit instantanément le tableau en invalidant la clé
-      queryClient.invalidateQueries({ queryKey: ["artwork-types"] })
+      queryClient.invalidateQueries({ queryKey: ["artworktype"] })
     },
     onError: () => {
       toast.error("Erreur lors de la suppression.")
@@ -33,7 +33,9 @@ export const ArtworktypeList = () => {
   })
 
   // 3. On génère les colonnes en y injectant la méthode de déclenchement de la mutation
-  const columns = artworktypeColumns((id_type) => deleteMutation.mutate(id_type))
+  const columns = artworktypeColumns((id_type) =>
+    deleteMutation.mutate(id_type)
+  )
 
   return (
     <div>

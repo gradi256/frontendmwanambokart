@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 import { PostArtworktype } from "../../services/PostArtworktype"
 import type { ArtworktypeInput } from "../../types/ArtworktypeType"
@@ -24,6 +24,8 @@ export const ArtworktypeForm = () => {
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
 
+  const queryClient = useQueryClient()
+
   const { mutate, isPending } = useMutation({
     mutationFn: (newData: ArtworktypeInput) => PostArtworktype(newData),
     onSuccess: () => {
@@ -31,6 +33,7 @@ export const ArtworktypeForm = () => {
       setName("")
       setDescription("")
       setOpen(false)
+      queryClient.invalidateQueries({ queryKey: ["artworktype"] })
     },
     onError: (err) => {
       toast.error(err.message)
@@ -51,7 +54,9 @@ export const ArtworktypeForm = () => {
     <div className="w-20">
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button>Ajouter un type d'œuvre <Plus /></Button>
+          <Button>
+            Ajouter un type d'œuvre <Plus />
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <form

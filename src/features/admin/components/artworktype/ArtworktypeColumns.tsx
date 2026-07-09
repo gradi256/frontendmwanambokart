@@ -13,9 +13,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Checkbox } from "@/components/ui/checkbox"
+import { AlertDialogShow } from "./AlertDialog"
 
-
-export const artworktypeColumns = (onDelete : (id : string) => void): ColumnDef<ArtworktypeType>[] => [
+export const artworktypeColumns = (
+  onDelete: (id: string) => void
+): ColumnDef<ArtworktypeType>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -67,7 +69,7 @@ export const artworktypeColumns = (onDelete : (id : string) => void): ColumnDef<
     },
   },
   {
-    header : "Actions",
+    header: "Actions",
     id: "actions",
     cell: ({ row }) => {
       const artworktype = row.original
@@ -90,10 +92,14 @@ export const artworktypeColumns = (onDelete : (id : string) => void): ColumnDef<
             <DropdownMenuSeparator />
             <DropdownMenuItem>Voir plus</DropdownMenuItem>
             <DropdownMenuItem>Modifier</DropdownMenuItem>
-            <DropdownMenuItem>
-              <Button variant={'ghost'} onClick={() => onDelete(artworktype.id_type)}>
-                Supprimer
-              </Button>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <AlertDialogShow
+                onConfirm={() => onDelete(artworktype.id_type)}
+                nameBtn="Supprimer"
+                title="êtes-vous sûr de vouloir supprimer ce type"
+                desc="Cettte action est irreversible"
+                act="Suppimer"
+              />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
