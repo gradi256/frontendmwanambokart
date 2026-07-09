@@ -9,7 +9,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const StepContact = () => {
+interface Props {
+  pays : string
+  phone : string
+}
+
+export const StepContact = ({pays, setPays, phone, setPhone} : Props) => {
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
       <div className="flex items-center gap-2 text-primary font-semibold mb-2">
@@ -19,7 +24,7 @@ export const StepContact = () => {
 
       <div className="space-y-2">
         <Label>Pays de résidence</Label>
-        <Select>
+        <Select value={pays} onValueChange={setPays}>
           <SelectTrigger>
             <SelectValue placeholder="Sélectionner un pays" />
           </SelectTrigger>
@@ -34,7 +39,7 @@ export const StepContact = () => {
         <Label htmlFor="phone">Numéro de téléphone</Label>
         <div className="relative">
           <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input id="phone" type="tel" className="pl-10" placeholder="+243842639657" />
+          <Input id="phone" type="tel" className="pl-10" placeholder="+243842639657" value={phone} onChange={setPhone} />
         </div>
       </div>
     </div>

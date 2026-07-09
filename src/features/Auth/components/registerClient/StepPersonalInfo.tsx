@@ -1,36 +1,63 @@
-import { User } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { User } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/select"
+import type { SetStateAction } from "react"
 
-export const StepPersonalInfo = () => {
+interface Props {
+  name : string
+  prenom : string
+  sexe : string
+  // setName : SetStateAction<string>
+  // setPrenom : SetStateAction<string>
+  // setSexe : SetStateAction<string>
+}
+
+export const StepPersonalInfo = ({
+  name,
+  setName,
+  prenom,
+  setPrenom,
+  sexe,
+  setSexe,
+} : Props) => {
   return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-      <div className="flex items-center gap-2 text-primary font-semibold mb-2">
-        <User className="w-5 h-5" />
+    <div className="animate-in space-y-6 duration-500 fade-in slide-in-from-right-4">
+      <div className="mb-2 flex items-center gap-2 font-semibold text-primary">
+        <User className="h-5 w-5" />
         <span>Vos informations</span>
       </div>
-      
+
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="name">Nom</Label>
-          <Input id="name" placeholder="Nom de famille" />
+          <Input
+            id="name"
+            placeholder="Nom de famille"
+            value={name}
+            onChange={setName}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="prenom">Prénom</Label>
-          <Input id="prenom" placeholder="Prénom" />
+          <Input
+            id="prenom"
+            placeholder="Prénom"
+            value={prenom}
+            onChange={setPrenom}
+          />
         </div>
       </div>
 
       <div className="space-y-2">
         <Label>Sexe</Label>
-        <Select>
+        <Select value={sexe} onValueChange={setSexe}>
           <SelectTrigger>
             <SelectValue placeholder="Choisir" />
           </SelectTrigger>
@@ -41,5 +68,5 @@ export const StepPersonalInfo = () => {
         </Select>
       </div>
     </div>
-  );
-};
+  )
+}

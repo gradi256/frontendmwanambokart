@@ -3,7 +3,17 @@ import { Lock, Eye, EyeOff } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
-export const StepSecurity = () => {
+interface PropsI {
+  email: string
+  password: string
+}
+
+export const StepSecurity = ({
+  email,
+  setEmail,
+  setPassword,
+  password,
+}: PropsI) => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
@@ -15,7 +25,13 @@ export const StepSecurity = () => {
 
       <div className="space-y-2">
         <Label htmlFor="email">Adresse e-mail</Label>
-        <Input id="email" type="email" placeholder="customer@example.com" />
+        <Input
+          id="email"
+          type="email"
+          placeholder="customer@example.com"
+          value={email}
+          onChange={setEmail}
+        />
       </div>
 
       <div className="space-y-2">
@@ -26,6 +42,8 @@ export const StepSecurity = () => {
             type={showPassword ? "text" : "password"}
             className="pr-10"
             placeholder="••••••••"
+            value={password}
+            onChange={setPassword}
           />
           <button
             type="button"
