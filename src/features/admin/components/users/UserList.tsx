@@ -1,3 +1,4 @@
+import { AdminList } from "./AdminList"
 import { ArtistList } from "./ArtistList"
 import { CustomerList } from "./CustomerList"
 
@@ -17,7 +18,7 @@ export const UserList = () => {
         <TabsList>
           <TabsTrigger value="overview">Clients</TabsTrigger>
           <TabsTrigger value="analytics">Artistes</TabsTrigger>
-          <TabsTrigger value="reports">Reports</TabsTrigger>
+          <TabsTrigger value="reports">Administrateurs</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
@@ -51,10 +52,9 @@ export const UserList = () => {
         <TabsContent value="reports">
           <Card>
             <CardHeader>
-              <CardTitle>Reports</CardTitle>
+              <CardTitle>Administrateurs</CardTitle>
               <CardDescription>
-                Generate and download your detailed reports. Export data in
-                multiple formats for analysis.
+                <AdminList />
               </CardDescription>
             </CardHeader>
             <CardContent className="text-sm text-muted-foreground">
