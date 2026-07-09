@@ -1,10 +1,10 @@
-import { DataTable } from "@/components/ui/data-table"
 import { CustomerColumns } from "./CustomerColums"
 import { useQuery } from "@tanstack/react-query"
 import { GetCustomer } from "../../services/artworktype/GetCustomer"
 import { TriangleAlert } from "lucide-react"
 import { Spinner0 } from "../artworktype/Spinner"
 import { toast } from "sonner"
+import { DataTable } from "../artworktype/data-table"
 
 export const CustomerList = () => {
   const {

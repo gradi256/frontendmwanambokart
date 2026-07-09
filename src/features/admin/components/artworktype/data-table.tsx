@@ -19,10 +19,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "./button"
+import { Button } from "../../../../components/ui/button"
 import React from "react"
 
-import { Input } from "./input"
+import { Input } from "../../../../components/ui/input"
 
 import {
   DropdownMenu,
@@ -30,7 +30,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { DataTablePagination } from "./DataTablePagination"
+import { DataTablePagination } from "../../../../components/ui/DataTablePagination"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]

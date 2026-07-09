@@ -3,9 +3,9 @@ import { getArtworktype } from "../../services/artworktype/GetArtworktype"
 import { TriangleAlert } from "lucide-react"
 import { toast } from "sonner"
 import { Spinner0 } from "./Spinner"
-import { DataTable } from "@/components/ui/data-table"
 import { artworktypeColumns } from "./ArtworktypeColumns"
 import { DeleteArtworktype } from "../../services/artworktype/DeleteArtworktype"
+import { DataTable } from "./data-table"
 
 export const ArtworktypeList = () => {
   const queryClient = useQueryClient()
