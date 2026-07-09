@@ -6,7 +6,6 @@ import { ArtiworktypeSpinner } from "./ArtiworktypeSpinner"
 import { DataTable } from "@/components/ui/data-table"
 import { artworktypeColumns } from "./ArtworktypeColumns"
 import { DeleteArtworktype } from "../../services/DeleteArtworktype"
-import type { ArtworktypeType } from "../../types/ArtworktypeType"
 
 export const ArtworktypeList = () => {
   const queryClient = useQueryClient()
@@ -22,7 +21,7 @@ export const ArtworktypeList = () => {
   })
 
   const deleteMutation = useMutation({
-    mutationFn: (id_type: ArtworktypeType) => DeleteArtworktype(id_type),
+    mutationFn: (id_type: string) => DeleteArtworktype(id_type),
     onSuccess: () => {
       toast.success("Type d'œuvre supprimé avec succès !")
       // Rafraîchit instantanément le tableau en invalidant la clé
