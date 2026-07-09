@@ -1,6 +1,5 @@
 import { ArtworktypeForm } from "../../components/artworktype/ArtworktypeForm"
 import { ArtworktypeList } from "../../components/artworktype/ArtworktypeList"
-// import { ArtworkypeBar } from "../../components/artworktype/ArtworkypeBar"
 
 export const ArtworktypePage = () => {
   return (
@@ -15,8 +14,9 @@ export const ArtworktypePage = () => {
       </div>
 
       <div className="mt-10 flex flex-col gap-10">
-         {/* <ArtworkypeBar /> */}
-        <ArtworktypeForm/> 
+        <div>
+          <ArtworktypeForm />
+        </div>
         <ArtworktypeList />
       </div>
     </div>
