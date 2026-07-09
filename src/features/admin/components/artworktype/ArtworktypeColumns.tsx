@@ -14,7 +14,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Checkbox } from "@/components/ui/checkbox"
 
-export const artworktypeColumns: ColumnDef<ArtworktypeType>[] = [
+
+export const artworktypeColumns = (onDelete : (id : string) => void): ColumnDef<ArtworktypeType>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -66,9 +67,10 @@ export const artworktypeColumns: ColumnDef<ArtworktypeType>[] = [
     },
   },
   {
+    header : "Actions",
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
+      const artworktype = row.original
 
       return (
         <DropdownMenu>
@@ -81,14 +83,18 @@ export const artworktypeColumns: ColumnDef<ArtworktypeType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id_type)}
+              onClick={() => navigator.clipboard.writeText(artworktype.id_type)}
             >
               Copier l'Id
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Voir plus</DropdownMenuItem>
             <DropdownMenuItem>Modifier</DropdownMenuItem>
-            <DropdownMenuItem>Suppimer</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button variant={'ghost'} onClick={() => onDelete(artworktype.id_type)}>
+                Supprimer
+              </Button>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

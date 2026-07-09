@@ -1,12 +1,16 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { getArtworktype } from "../../services/GetArtworktype"
-import { Palette, TriangleAlert } from "lucide-react"
+import { TriangleAlert } from "lucide-react"
 import { toast } from "sonner"
 import { ArtiworktypeSpinner } from "./ArtiworktypeSpinner"
 import { DataTable } from "@/components/ui/data-table"
 import { artworktypeColumns } from "./ArtworktypeColumns"
+import { DeleteArtworktype } from "../../services/DeleteArtworktype"
+import type { ArtworktypeType } from "../../types/ArtworktypeType"
 
 export const ArtworktypeList = () => {
+  const queryClient = useQueryClient()
+
   const {
     data: artworktype = [],
     isLoading,
@@ -17,25 +21,36 @@ export const ArtworktypeList = () => {
     queryFn: getArtworktype,
   })
 
+  const deleteMutation = useMutation({
+    mutationFn: (id_type: ArtworktypeType) => DeleteArtworktype(id_type),
+    onSuccess: () => {
+      toast.success("Type d'œuvre supprimé avec succès !")
+      // Rafraîchit instantanément le tableau en invalidant la clé
+      queryClient.invalidateQueries({ queryKey: ["artwork-types"] })
+    },
+    onError: () => {
+      toast.error("Erreur lors de la suppression.")
+    },
+  })
+
+  // 3. On génère les colonnes en y injectant la méthode de déclenchement de la mutation
+  const columns = artworktypeColumns((id_type) => deleteMutation.mutate(id_type))
+
   return (
     <div>
-      <div>
-        <h1 className="flex items-center gap-2 p-4 tracking-tight text-muted-foreground">
-          <Palette />
-          Types d'œuvres de la galerie
-        </h1>
-        {isError && (
-          <div className="flex h-50 flex-col items-center justify-center gap-2 text-destructive">
-            <TriangleAlert className="h-10 w-10" />
-            <span>impossible de récupérer la liste des types d'oœuvre</span>
-          </div>
-        )}
-        {isError && toast.error(error.message)}
-        {isLoading && <ArtiworktypeSpinner />}
-
-        <div>
-          <DataTable columns={artworktypeColumns} data={artworktype} />
+      {isError && (
+        <div className="flex h-50 flex-col items-center justify-center gap-2 text-destructive">
+          <TriangleAlert className="h-10 w-10" />
+          <span>impossible de récupérer la liste des types d'oœuvre</span>
         </div>
+      )}
+      {isError && toast.error(error.message)}
+      {isLoading && <ArtiworktypeSpinner />}
+
+      <div>
+        {!isLoading && !isError && artworktype && (
+          <DataTable columns={columns} data={artworktype} />
+        )}
       </div>
     </div>
   )

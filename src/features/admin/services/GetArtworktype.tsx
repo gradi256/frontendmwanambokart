@@ -5,7 +5,6 @@ import axios from "axios"
 
 export const getArtworktype = async () => {
   const response = await axios.get(`${API_URL}/artworktype`)
-  console.log(response.data)
   return response.data.data
 }
 
