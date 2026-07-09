@@ -1,9 +1,10 @@
-import { type ColumnDef } from "@tanstack/react-table"
-import type { ArtworktypeType } from "../../types/ArtworktypeType"
-
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import type { ColumnDef } from "@tanstack/react-table"
+import { ArrowUpDown } from "lucide-react"
+import type { CustomerType } from "../../types/CustomerType"
+import { MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,11 +13,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Checkbox } from "@/components/ui/checkbox"
 
-export const UserColumn = (
-  onDelete: (id: string) => void
-): ColumnDef<ArtworktypeType>[] => [
+export const CustomerColumns: ColumnDef<CustomerType>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -40,8 +38,8 @@ export const UserColumn = (
     // enableHiding: false,
   },
   {
-    accessorKey: "id_user",
-    header: () => <div className="">Identifiant</div>,
+    accessorKey: "customer.id_customer",
+    header: "Identifiant",
   },
   {
     accessorKey: "customer.name",
@@ -51,7 +49,21 @@ export const UserColumn = (
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nom de la catégorie
+          Nom
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+  },
+  {
+    accessorKey: "customer.prenom",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Prénom
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
@@ -59,13 +71,44 @@ export const UserColumn = (
   },
   {
     accessorKey: "email",
-    header: "email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
   },
   {
-    header: "Actions",
+    accessorKey: "customer.phone",
+    header: "Mobile",
+  },
+  {
+    accessorKey: "customer.pays",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Pays
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+  },
+  {
+    accessorKey: "customer.sexe",
+    header: "Sexe",
+  },
+  {
     id: "actions",
     cell: ({ row }) => {
-      const artworktype = row.original
+      const payment = row.original
 
       return (
         <DropdownMenu>
@@ -78,21 +121,13 @@ export const UserColumn = (
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(artworktype.id_type)}
+              onClick={() => navigator.clipboard.writeText(payment.id)}
             >
-              Copier l'Id
+              Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Voir plus</DropdownMenuItem>
-            <DropdownMenuItem>Modifier</DropdownMenuItem>
-            <DropdownMenuItem>
-              <Button
-                variant={"ghost"}
-                onClick={() => onDelete(artworktype.id_type)}
-              >
-                Supprimer
-              </Button>
-            </DropdownMenuItem>
+            <DropdownMenuItem>View customer</DropdownMenuItem>
+            <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
