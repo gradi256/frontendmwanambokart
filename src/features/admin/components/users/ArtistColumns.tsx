@@ -13,8 +13,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { AlertDialogShow } from "../artworktype/AlertDialog"
 
-export const ArtistColumns: ColumnDef<CustomerType>[] = [
+export const ArtistColumns = (
+  onDelete: (id: string) => void
+): ColumnDef<CustomerType>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -108,7 +111,8 @@ export const ArtistColumns: ColumnDef<CustomerType>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
+      const artisan = row.original
+      const id = artisan.artist?.id_artist
 
       return (
         <DropdownMenu>
@@ -121,13 +125,21 @@ export const ArtistColumns: ColumnDef<CustomerType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(artisan.id)}
             >
-              Copy payment ID
+              Copier l'Id
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Voir l'artist</DropdownMenuItem>
+            <DropdownMenuItem>
+              <AlertDialogShow
+                onConfirm={() => onDelete(artisan.id)}
+                nameBtn="Supprimer"
+                title="Suppirmer l'utilisateur"
+                desc="Cette action est irreviser..."
+                act="Supprimer"
+              />
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
