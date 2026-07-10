@@ -1,6 +1,5 @@
 import type { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
-import type { CustomerType } from "../../types/CustomerType"
 import { MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -14,10 +13,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { AlertDialogShow } from "../artworktype/AlertDialog"
+import type { ArtistType } from "../../types/ArtistType"
 
 export const ArtistColumns = (
   onDelete: (id: string) => void
-): ColumnDef<CustomerType>[] => [
+): ColumnDef<ArtistType>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -112,7 +112,6 @@ export const ArtistColumns = (
     id: "actions",
     cell: ({ row }) => {
       const artisan = row.original
-      const id = artisan.artist?.id_artist
 
       return (
         <DropdownMenu>
@@ -125,15 +124,15 @@ export const ArtistColumns = (
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(artisan.id)}
+              onClick={() => navigator.clipboard.writeText(artisan.id_artist)}
             >
               Copier l'Id
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Voir l'artist</DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <AlertDialogShow
-                onConfirm={() => onDelete(artisan.id)}
+                onConfirm={() => onDelete(artisan.id_artist)}
                 nameBtn="Supprimer"
                 title="Suppirmer l'utilisateur"
                 desc="Cette action est irreviser..."

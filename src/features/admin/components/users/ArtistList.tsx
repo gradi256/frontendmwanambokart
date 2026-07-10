@@ -25,12 +25,16 @@ export const ArtistList = () => {
       queryClient.invalidateQueries({ queryKey: ["users"] })
       toast.success("Utilisateur supprimé avec succès !")
     },
-    onError: () => {
+    onError: (error) => {
       toast.error("Erreur lors de la suppression")
+      console.log(error?.message)
     },
   })
 
-  const columns = ArtistColumns((id_artist) => deleteMutation.mutate(id_artist))
+  const columns = ArtistColumns((id_artist) => {
+    console.log(id_artist)
+    deleteMutation.mutate(id_artist)
+  })
 
   return (
     <div>
