@@ -1,8 +1,16 @@
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Camera, Upload } from "lucide-react"
+import type { ChangeEvent } from "react"
 
-export const Showcase = () => {
+interface PropsI {
+  img : string
+  biographie : string
+  setImg : (e : ChangeEvent<HTMLInputElement>) => void
+  setBiographie : (e : ChangeEvent<HTMLTextAreaElement>) => void
+}
+
+export const Showcase = ({img,setImg, biographie, setBiographie} : PropsI) => {
   return (
     <div className="animate-in space-y-6 duration-500 fade-in slide-in-from-right-4">
       <div className="mb-2 flex items-center gap-2 font-semibold text-primary">
@@ -16,6 +24,8 @@ export const Showcase = () => {
             <input
               type="file"
               className="absolute inset-0 cursor-pointer opacity-0"
+              value={img}
+              onChange={setImg}
             />
           </div>
         </div>
@@ -37,6 +47,8 @@ export const Showcase = () => {
           id="bio"
           rows={4}
           placeholder="Décrivez votre passion artistique en quelques mots..."
+          value={biographie}
+          onChange={setBiographie}
         />
       </div>
     </div>

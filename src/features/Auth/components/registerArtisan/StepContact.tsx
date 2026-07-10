@@ -8,8 +8,25 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
+import type { ChangeEvent } from "react"
 
-export const StepContact = () => {
+interface PropsI {
+  pays: string
+  sexe: string
+  phone: string
+  setPays: (value: string) => void
+  setSexe: (value: string) => void
+  setPhone: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+export const StepContact = ({
+  pays,
+  sexe,
+  phone,
+  setPays,
+  setSexe,
+  setPhone,
+}: PropsI) => {
   return (
     <div className="animate-in space-y-6 duration-500 fade-in slide-in-from-right-4">
       <div className="mb-2 flex items-center gap-2 font-semibold text-primary">
@@ -19,7 +36,7 @@ export const StepContact = () => {
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label>Pays</Label>
-          <Select>
+          <Select value={pays} onValueChange={setPays}>
             <SelectTrigger>
               <SelectValue placeholder="Choisir" />
             </SelectTrigger>
@@ -31,7 +48,7 @@ export const StepContact = () => {
         </div>
         <div className="space-y-2">
           <Label>Sexe</Label>
-          <Select>
+          <Select value={sexe} onValueChange={setSexe}>
             <SelectTrigger>
               <SelectValue placeholder="Choisir" />
             </SelectTrigger>
@@ -44,7 +61,13 @@ export const StepContact = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="whatsapp">Numéro WhatsApp</Label>
-        <Input id="whatsapp" type="tel" placeholder="+243 890 000 000" />
+        <Input
+          id="whatsapp"
+          type="tel"
+          placeholder="+243 890 000 000"
+          value={phone}
+          onChange={setPhone}
+        />
       </div>
     </div>
   )

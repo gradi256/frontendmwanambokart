@@ -1,9 +1,21 @@
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, Lock } from "lucide-react"
-import { useState } from "react"
+import { useState, type ChangeEvent } from "react"
 
-export const Validate = () => {
+interface PropsI {
+  email: string
+  password: string
+  setEmail: (e: ChangeEvent<HTMLInputElement>) => void
+  setPassword: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+export const Validate = ({
+  email,
+  setEmail,
+  password,
+  setPassword,
+}: PropsI) => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
@@ -14,7 +26,13 @@ export const Validate = () => {
       </div>
       <div className="space-y-2">
         <Label htmlFor="email">Adresse e-mail</Label>
-        <Input id="email" type="email" placeholder="artisan@mwanambokart.com" />
+        <Input
+          id="email"
+          type="email"
+          placeholder="artisan@mwanambokart.com"
+          value={email}
+          onChange={setEmail}
+        />
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Mot de passe</Label>
@@ -24,6 +42,8 @@ export const Validate = () => {
             type={showPassword ? "text" : "password"}
             className="pr-10"
             placeholder="••••••••"
+            value={password}
+            onChange={setPassword}
           />
           <button
             type="button"

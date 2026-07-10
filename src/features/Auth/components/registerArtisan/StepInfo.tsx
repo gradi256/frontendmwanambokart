@@ -1,8 +1,25 @@
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { User } from "lucide-react"
+import type { ChangeEvent } from "react"
 
-export const StepInfo = () => {
+interface PropsI {
+  name: string
+  prenom: string
+  pseudo: string
+  setName: (e: ChangeEvent<HTMLInputElement>) => void
+  setPrenom: (e: ChangeEvent<HTMLInputElement>) => void
+  setPseudo: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
+export const StepInfo = ({
+  name,
+  prenom,
+  pseudo,
+  setName,
+  setPrenom,
+  setPseudo,
+}: PropsI) => {
   return (
     <div className="animate-in space-y-6 duration-500 fade-in slide-in-from-right-4">
       <div className="mb-2 flex items-center gap-2 font-semibold text-primary">
@@ -12,11 +29,21 @@ export const StepInfo = () => {
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="lastname">Nom</Label>
-          <Input id="lastname" placeholder="Kasanji" />
+          <Input
+            id="lastname"
+            placeholder="Kasanji"
+            value={name}
+            onChange={setName}
+          />
         </div>
         <div className="space-y-2">
           <Label htmlFor="firstname">Prénom</Label>
-          <Input id="firstname" placeholder="Dieudonné" />
+          <Input
+            id="firstname"
+            placeholder="Dieudonné"
+            value={prenom}
+            onChange={setPrenom}
+          />
         </div>
       </div>
       <div className="space-y-2">
@@ -26,7 +53,12 @@ export const StepInfo = () => {
             Optionnel
           </span>
         </div>
-        <Input id="pseudonym" placeholder="El_Sculpto" />
+        <Input
+          id="pseudonym"
+          placeholder="El_Sculpto"
+          value={pseudo}
+          onChange={setPseudo}
+        />
       </div>
     </div>
   )
