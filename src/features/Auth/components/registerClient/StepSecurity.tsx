@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type ChangeEvent } from "react"
 import { Lock, Eye, EyeOff } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -6,6 +6,8 @@ import { Label } from "@/components/ui/label"
 interface PropsI {
   email: string
   password: string
+  setEmail: (e: ChangeEvent<HTMLInputElement>) => void
+  setPassword: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const StepSecurity = ({

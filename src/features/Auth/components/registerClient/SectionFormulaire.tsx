@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  type MouseEventHandler,
-  type SubmitEventHandler,
-} from "react"
+import { type MouseEventHandler, type SubmitEventHandler } from "react"
 import { FooterForm } from "./FooterForm"
 import { HeaderForm } from "./HeaderForm"
 import { NavButton } from "./NavButton"
@@ -10,33 +6,40 @@ import { StepContact } from "./StepContact"
 import { StepIndicator } from "./StepIndicator"
 import { StepPersonalInfo } from "./StepPersonalInfo"
 import { StepSecurity } from "./StepSecurity"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { CreateCostumer } from "../../services/PostCustomer"
 
 interface PropsI {
   step: number
   prevStep: MouseEventHandler<HTMLButtonElement>
   onSubmit: SubmitEventHandler<HTMLFormElement>
+  isPending: boolean
+  formData: {
+    name: string
+    prenom: string
+    sexe: string
+    pays: string
+    phone: string
+    email: string
+    password: string
+  }
+  setters: {
+    setName: (val: string) => void
+    setPrenom: (val: string) => void
+    setSexe: (val: string) => void
+    setPays: (val: string) => void
+    setPhone: (val: string) => void
+    setEmail: (val: string) => void
+    setPassword: (val: string) => void
+  }
 }
 
-export const SectionFormulaire = ({ step, prevStep, onSubmit }: PropsI) => {
-  const queryClient = useQueryClient()
-  const [name, setName] = useState("")
-  const [prenom, Setprenom] = useState("")
-  const [sexe, setSexe] = useState("")
-
-  const [pays, setPays] = useState("")
-  const [phone, setPhone] = useState("")
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-
-  const { mutate, isPending, isError } = useMutation({
-    mutationFn: CreateCostumer,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["todos"] })
-    },
-  })
+export const SectionFormulaire = ({
+  step,
+  prevStep,
+  onSubmit,
+  isPending,
+  formData,
+  setters,
+}: PropsI) => {
   return (
     <div className="flex w-full flex-col items-center overflow-y-auto bg-background px-6 py-12 lg:w-[60%] lg:px-20">
       <div className="w-full max-w-lg">
@@ -47,31 +50,35 @@ export const SectionFormulaire = ({ step, prevStep, onSubmit }: PropsI) => {
           {/* Rendu conditionnel des étapes */}
           {step === 1 && (
             <StepPersonalInfo
-              name={name}
-              setName={(e) => setName(e.target.value)}
-              prenom={prenom}
-              setPrenom={(e) => Setprenom(e.target.value)}
-              sexe={sexe}
-              setSexe={(e) => setSexe(e.target.select)}
+              name={formData.name}
+              setName={(e) => setters.setName(e.target.value)}
+              prenom={formData.prenom}
+              setPrenom={(e) => setters.setPrenom(e.target.value)}
+              sexe={formData.sexe}
+              setSexe={setters.setSexe}
             />
           )}
           {step === 2 && (
             <StepContact
-              pays={pays}
-              setPays={(e) => setPays(e.target.value)}
-              phone={phone}
-              setPhone={(e) => setPhone(e.target.value)}
+              pays={formData.pays}
+              setPays={setters.setPays}
+              phone={formData.phone}
+              setPhone={(e) => setters.setPhone(e.target.value)}
             />
           )}
-          {step === 3 && <StepSecurity />}
+          {step === 3 && (
+            <StepSecurity
+              email={formData.email}
+              setEmail={(e) => setters.setEmail(e.target.value)}
+              password={formData.password}
+              setPassword={(e) => setters.setPassword(e.target.value)}
+            />
+          )}
 
           <NavButton
-            step={step}
+           step={step}
             prevStep={prevStep}
-            email={email}
-            setEmail={setEmail}
-            password={password}
-            setPassword={setPassword}
+            isPending={isPending}
           />
         </form>
 
