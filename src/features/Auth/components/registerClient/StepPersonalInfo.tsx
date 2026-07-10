@@ -8,15 +8,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import type { SetStateAction } from "react"
+import type { ChangeEvent, } from "react"
 
 interface Props {
-  name : string
-  prenom : string
-  sexe : string
-  // setName : SetStateAction<string>
-  // setPrenom : SetStateAction<string>
-  // setSexe : SetStateAction<string>
+  name: string
+  prenom: string
+  sexe: string
+  setName: (e: ChangeEvent<HTMLInputElement>) => void
+  setPrenom: (e: ChangeEvent<HTMLInputElement>) => void
+  setSexe: (value: string) => void
 }
 
 export const StepPersonalInfo = ({
@@ -26,7 +26,7 @@ export const StepPersonalInfo = ({
   setPrenom,
   sexe,
   setSexe,
-} : Props) => {
+}: Props) => {
   return (
     <div className="animate-in space-y-6 duration-500 fade-in slide-in-from-right-4">
       <div className="mb-2 flex items-center gap-2 font-semibold text-primary">
