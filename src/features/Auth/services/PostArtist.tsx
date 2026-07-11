@@ -1,17 +1,9 @@
 import { API_URL } from "@/config/api"
 import axios from "axios"
-import type { ArtisanData } from "../types/ArtisanData"
 
-export const CreateArtist = async (userData: ArtisanData) => {
+export const CreateArtist = async (formData: FormData) => {
   try {
-    const artist = {
-      userData: {
-        email: userData.email,
-        password: userData.password,
-      },
-      artistData: userData.artist,
-    }
-    const { data } = await axios.post(`${API_URL}/artist`, artist)
+    const { data } = await axios.post(`${API_URL}/artist`, formData)
     return data.data
   } catch (error) {
     if (axios.isAxiosError(error)) {

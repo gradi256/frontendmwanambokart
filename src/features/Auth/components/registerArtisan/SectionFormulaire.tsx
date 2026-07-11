@@ -9,6 +9,7 @@ import { ActionForm } from "./ActionForm"
 import { ToConnexion } from "./ToConnexion"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { CreateArtist } from "../../services/PostArtist"
+import axios from "axios"
 import { toast } from "sonner"
 
 export const SectionFormulaire = () => {
@@ -19,7 +20,7 @@ export const SectionFormulaire = () => {
   const [name, setName] = useState("")
   const [prenom, setPrenom] = useState("")
   const [pseudo, setPseudo] = useState("")
-  const [profile, setProfile] = useState("")
+  const [profile, setProfile] = useState<File | null>(null)
   const [biographie, setBiographie] = useState("")
   const [sexe, setSexe] = useState("")
   const [pays, setPays] = useState("")
@@ -33,8 +34,22 @@ export const SectionFormulaire = () => {
       queryClient.invalidateQueries({ queryKey: ["users"] })
       toast.success(name + "Votre compte a été crée ")
     },
-    onError: (err) => {
-      toast.error(err.message)
+    onError: (err: any) => {
+      console.error("CreateArtist error (front):", err)
+      if (err?.response) {
+        console.error("STATUS :", err.response.status)
+        console.error("DATA :", err.response.data)
+        const serverMessage =
+          typeof err.response.data === "string"
+            ? err.response.data
+            : err.response.data?.message || JSON.stringify(err.response.data)
+        toast.error(`Erreur ${err.response.status}: ${serverMessage}`)
+      } else if (axios.isAxiosError && axios.isAxiosError(err)) {
+        console.error("Axios error:", err.message)
+        toast.error(err.message)
+      } else {
+        toast.error(err?.message || "Erreur inconnue")
+      }
     },
   })
 
@@ -44,25 +59,42 @@ export const SectionFormulaire = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    const artistData = {
-      email,
-      password,
-      artist: {
-        name,
-        prenom,
-        biographie,
-        profile,
-        pseudo,
-        sexe,
-        pays,
-        phone,
-      },
-    }
-
     if (step < 4) {
       nextStep()
     } else {
-      mutate(artistData)
+      const formDataToSend = new FormData()
+
+      formDataToSend.append(
+        "userData",
+        JSON.stringify({
+          email,
+          password,
+        })
+      )
+      formDataToSend.append(
+        "artistData",
+        JSON.stringify({
+          name,
+          prenom,
+          pseudo,
+          phone,
+          pays,
+          sexe,
+          biographie,
+        })
+      )
+
+      if (profile) {
+        formDataToSend.append("image", profile)
+      }
+
+      // Debug: log FormData entries (useful pour diagnostiquer les erreurs 500)
+      for (const entry of formDataToSend.entries()) {
+        // entry is [key, value]
+        console.log("FormData:", entry[0], entry[1])
+      }
+
+      mutate(formDataToSend)
     }
   }
 
@@ -122,7 +154,9 @@ export const SectionFormulaire = () => {
             <Showcase
               img={formData.profile}
               biographie={formData.biographie}
-              setImg={(e) => setters.setProfile(e.target.value)}
+              setImg={(e) =>
+                setters.setProfile(e.target.files ? e.target.files[0] : null)
+              }
               setBiographie={(e) => setters.setBiographie(e.target.value)}
             />
           )}
@@ -135,7 +169,12 @@ export const SectionFormulaire = () => {
             />
           )}
 
-          <ActionForm step={step} nextStep={nextStep} prevStep={prevStep} isPending={isPending} />
+          <ActionForm
+            step={step}
+            nextStep={nextStep}
+            prevStep={prevStep}
+            isPending={isPending}
+          />
         </form>
 
         <ToConnexion />

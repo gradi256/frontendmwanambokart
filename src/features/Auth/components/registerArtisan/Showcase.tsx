@@ -4,13 +4,21 @@ import { Camera, Upload } from "lucide-react"
 import type { ChangeEvent } from "react"
 
 interface PropsI {
-  img : string
-  biographie : string
-  setImg : (e : ChangeEvent<HTMLInputElement>) => void
-  setBiographie : (e : ChangeEvent<HTMLTextAreaElement>) => void
+  img: File | null
+  biographie: string
+  setImg: (e: ChangeEvent<HTMLInputElement>) => void
+  setBiographie: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-export const Showcase = ({img,setImg, biographie, setBiographie} : PropsI) => {
+export const Showcase = ({
+  img,
+  setImg,
+  biographie,
+  setBiographie,
+}: PropsI) => {
+  // Génère une URL temporaire pour afficher l'aperçu si un fichier est présent
+  const imagePreviewUrl = img ? URL.createObjectURL(img) : null
+
   return (
     <div className="animate-in space-y-6 duration-500 fade-in slide-in-from-right-4">
       <div className="mb-2 flex items-center gap-2 font-semibold text-primary">
@@ -20,11 +28,21 @@ export const Showcase = ({img,setImg, biographie, setBiographie} : PropsI) => {
       <div className="flex items-center gap-6 rounded-xl border bg-muted/20 p-4">
         <div className="group relative">
           <div className="flex h-20 w-20 cursor-pointer items-center justify-center overflow-hidden rounded-full border-2 border-dashed border-border bg-background transition-colors group-hover:border-primary">
-            <Upload className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
+            {/* 2. Ajout de l'aperçu : Si une image est choisie, on l'affiche, sinon on montre l'icône Upload */}
+            {imagePreviewUrl ? (
+              <img
+                src={imagePreviewUrl}
+                alt="Aperçu profil"
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <Upload className="h-5 w-5 text-muted-foreground transition-colors group-hover:text-primary" />
+            )}
+
             <input
               type="file"
+              accept="image"
               className="absolute inset-0 cursor-pointer opacity-0"
-              value={img}
               onChange={setImg}
             />
           </div>
