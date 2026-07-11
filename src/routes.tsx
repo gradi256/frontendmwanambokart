@@ -7,6 +7,7 @@ import { AuthLayout } from "./layouts/AuthLayout"
 import { HomeRegister } from "./features/Auth/pages/HomeRegister"
 import { RegisterClient } from "./features/Auth/pages/RegisterCient"
 import { RegisterArtist } from "./features/Auth/pages/RegisterArtist"
+import { ConnexionClient } from "./features/Auth/pages/ConnexionClient"
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ export const router = createBrowserRouter([
         path: "/auth/auth-register/resgiter-artist",
         element: <RegisterArtist />,
       },
+      {
+        path : '/auth/auth-connexion/connexion-client',
+        element : <ConnexionClient />
+      }
     ],
   },
   // ROUTES ADMIN
