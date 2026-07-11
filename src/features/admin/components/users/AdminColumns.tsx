@@ -121,7 +121,7 @@ export const AdminColumns: ColumnDef<CustomerType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(payment.id_user)}
             >
               Copy payment ID
             </DropdownMenuItem>
