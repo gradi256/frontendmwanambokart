@@ -1,7 +1,16 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { ArrowLeft, ArrowRight, Eye, EyeOff, Lock, Mail, RefreshCw, ShieldCheck } from "lucide-react"
+import {
+  ArrowLeft,
+  ArrowRight,
+  Eye,
+  EyeOff,
+  Lock,
+  Mail,
+  RefreshCw,
+  ShieldCheck,
+} from "lucide-react"
 
 interface PropsI {
   view: string
@@ -12,30 +21,30 @@ interface PropsI {
 
 export const SectionForm = ({
   view,
+  setView,
   showPassword,
   setShowPassword,
-  setView,
 }: PropsI) => {
   return (
     <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
       {view === "login" && (
         <div className="animate-in space-y-5 duration-300 zoom-in-95 fade-in">
           <div className="space-y-2">
-            <Label htmlFor="client-email">Adresse e-mail</Label>
+            <Label htmlFor="login-email">Adresse e-mail</Label>
             <div className="relative">
               <Mail className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                id="client-email"
+                id="login-email"
                 type="email"
                 className="h-11 pl-10"
-                placeholder="client@example.com"
+                placeholder="artisan@mwanambokart.com"
               />
             </div>
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label htmlFor="client-password">Mot de passe</Label>
+              <Label htmlFor="login-password">Mot de passe</Label>
               <button
                 type="button"
                 onClick={() => setView("forgot")}
@@ -47,7 +56,7 @@ export const SectionForm = ({
             <div className="relative">
               <Lock className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                id="client-password"
+                id="login-password"
                 type={showPassword ? "text" : "password"}
                 className="h-11 pr-10 pl-10"
                 placeholder="••••••••"
