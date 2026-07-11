@@ -16,11 +16,11 @@ export const ArtistList = () => {
     error,
   } = useQuery({
     queryKey: ["users"],
-    queryFn: GetArtist,
+    queryFn: GetArtist, 
   })
 
   const deleteMutation = useMutation({
-    mutationFn: (id_artist: string) => DeleteArtisan(id_artist),
+    mutationFn: (id_user: string) => DeleteArtisan(id_user),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] })
       toast.success("Utilisateur supprimé avec succès !")
@@ -31,11 +31,10 @@ export const ArtistList = () => {
     },
   })
 
-  const columns = ArtistColumns((id_artist) => {
-    console.log(id_artist)
-    deleteMutation.mutate(id_artist)
+  const columns = ArtistColumns((id_user) => {
+    deleteMutation.mutate(id_user)
   })
-
+ 
   return (
     <div>
       {isError && (

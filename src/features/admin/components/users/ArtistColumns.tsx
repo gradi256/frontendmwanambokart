@@ -111,7 +111,8 @@ export const ArtistColumns = (
   {
     id: "actions",
     cell: ({ row }) => {
-      const artisan = row.original
+      const userArtistan = row.original
+      const userId = userArtistan.id_user || userArtistan.artist?.id_artist
 
       return (
         <DropdownMenu>
@@ -124,7 +125,7 @@ export const ArtistColumns = (
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(artisan.id_artist)}
+              onClick={() => navigator.clipboard.writeText(userId)}
             >
               Copier l'Id
             </DropdownMenuItem>
@@ -132,7 +133,7 @@ export const ArtistColumns = (
             <DropdownMenuItem>Voir l'artist</DropdownMenuItem>
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
               <AlertDialogShow
-                onConfirm={() => onDelete(artisan.id_artist)}
+                onConfirm={() => onDelete(userId)}
                 nameBtn="Supprimer"
                 title="Suppirmer l'utilisateur"
                 desc="Cette action est irreviser..."
