@@ -13,8 +13,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { AlertDialogShow } from "../artworktype/AlertDialog"
 
-export const CustomerColumns: ColumnDef<CustomerType>[] = [
+export const CustomerColumns = (
+  onDelete: (id: string) => void
+): ColumnDef<CustomerType>[] => [
   {
     id: "select",
     header: ({ table }) => (
@@ -108,7 +111,8 @@ export const CustomerColumns: ColumnDef<CustomerType>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
+      const customerUser = row.original
+      const userId = customerUser.id_user || customerUser.customer?.id_customer
 
       return (
         <DropdownMenu>
@@ -121,13 +125,21 @@ export const CustomerColumns: ColumnDef<CustomerType>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(userId)}
             >
               Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              <AlertDialogShow
+                onConfirm={() => onDelete(userId)}
+                nameBtn="Supprimer"
+                title="Suppirmer l'utilisateur"
+                desc="Cette action est irreviser..."
+                act="Supprimer"
+              />
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

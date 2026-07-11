@@ -1,12 +1,14 @@
 import { CustomerColumns } from "./CustomerColums"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { GetCustomer } from "../../services/user/GetCustomer"
 import { TriangleAlert } from "lucide-react"
 import { Spinner0 } from "../artworktype/Spinner"
 import { toast } from "sonner"
 import { DataTable } from "./data-table"
+import { DeleteCustomer } from "../../services/user/DeleteCustomer"
 
 export const CustomerList = () => {
+  const queryClient = useQueryClient()
   const {
     data: users,
     isLoading,
@@ -15,6 +17,22 @@ export const CustomerList = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: GetCustomer,
+  })
+
+  const deleteMutation = useMutation({
+    mutationFn: (id_user: string) => DeleteCustomer(id_user),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] })
+      toast.success("Utilisateur supprimé avec succès !")
+    },
+    onError: (error) => {
+      toast.error("Erreur lors de la suppression")
+      console.log(error?.message)
+    },
+  })
+
+  const columns = CustomerColumns((id_user) => {
+    deleteMutation.mutate(id_user)
   })
   return (
     <div>
@@ -29,7 +47,7 @@ export const CustomerList = () => {
 
       <div>
         {!isLoading && !isError && users && (
-          <DataTable columns={CustomerColumns} data={users} />
+          <DataTable columns={columns} data={users} />
         )}
       </div>
     </div>
