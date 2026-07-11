@@ -6,12 +6,9 @@ export type CustomerType = {
     userId: string
     name: string
     prenom: string
-    pseudo: string
     phone: string
     pays: string
     sexe: string
-    biographie: string
-    profile: string
     createdAt: string
     updatedAt: string
   }
