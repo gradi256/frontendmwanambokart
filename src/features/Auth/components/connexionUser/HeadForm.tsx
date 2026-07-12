@@ -17,13 +17,13 @@ export const HeadForm = ({ view }: PropsI) => {
 
       <div className="text-center lg:text-left">
         <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground">
-          {view === "login" && "Espace Artisan"}
+          {view === "login" && "Espace de connexion"}
           {view === "forgot" && "Mot de passe oublié"}
           {view === "reset" && "Réinitialisation"}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {view === "login" &&
-            "Saisissez vos identifiants pour accéder à votre tableau de bord."}
+            "Saisissez vos identifiants pour accéder à votre compte."}
           {view === "forgot" &&
             "Entrez votre e-mail pour recevoir un lien de récupération."}
           {view === "reset" &&

@@ -1,10 +1,10 @@
 import { useState } from "react"
-import { SectionVideo } from "../components/connexionArtisan/SectionVideo"
-import { HeadForm } from "../components/connexionArtisan/HeadForm"
-import { SectionForm } from "../components/connexionArtisan/SectionForm"
-import { FooterForm } from "../components/connexionArtisan/FooterForm"
+import { SectionVideo } from "../components/connexionUser/SectionVideo"
+import { HeadForm } from "../components/connexionUser/HeadForm"
+import { SectionForm } from "../components/connexionUser/SectionForm"
+import { FooterForm } from "../components/connexionUser/FooterForm"
 
-export const ConnexionArtist = () => {
+export const ConnexionUser = () => {
   const [view, setView] = useState<"login" | "forgot" | "reset">("login")
   const [showPassword, setShowPassword] = useState(false)
 
