@@ -8,7 +8,12 @@ import { Login } from "../services/Login"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
 import { useAuthStore } from "@/stores/useAuthStore"
+import { ForgotPasswordService } from "../services/ForgotPassword"
 
+interface userDataI {
+  id: string
+  role: string
+}
 
 export const ConnexionUser = () => {
   const [view, setView] = useState<"login" | "forgot" | "reset">("login")
@@ -27,20 +32,18 @@ export const ConnexionUser = () => {
       queryClient.invalidateQueries({ queryKey: ["login"] })
       toast.success(servePaylod.message || "Connexion à votre compte réussi !")
 
-
-      const userData  = {
-        id : servePaylod.userId,
-        role : servePaylod.role
+      const userData: userDataI = {
+        id: servePaylod.userId,
+        role: servePaylod.role,
       }
-
 
       login(servePaylod.accessToken, userData)
       console.log(servePaylod)
       if (servePaylod.role === "CUSTOMER") {
         navigate("/dashboard/client")
-        localStorage.setItem('email', servePaylod.email)
+        localStorage.setItem("email", servePaylod.email)
       } else if (servePaylod.role === "ARTIST") {
-        localStorage.setItem('pseudo', servePaylod.pseudo)
+        localStorage.setItem("pseudo", servePaylod.pseudo)
         navigate("/dashboard/artisan")
       }
     },
@@ -56,10 +59,31 @@ export const ConnexionUser = () => {
     },
   })
 
+  const { mutate: sendEmailMute, isPending: isForgotPending } = useMutation({
+    mutationFn: ForgotPasswordService,
+    onSuccess: (data) => {
+      toast.success(data.message || "Lien de ŕecupération envoyé par email")
+    },
+    onError: (err: any) => {
+      const backendMessage =
+        err.response?.data?.error || "Une erreur est survenue"
+      toast.error(backendMessage)
+    },
+  })
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
     mutate({ email, password })
+  }
+
+  const handleForgotPasswordSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    if (!email) {
+      toast.error("Veuillez renseignez votre email !")
+      return
+    }
+    sendEmailMute({ email })
   }
 
   return (
@@ -79,6 +103,8 @@ export const ConnexionUser = () => {
             setEmail={(e) => setEmail(e.target.value)}
             password={password}
             setPassword={(e) => setPasworrd(e.target.value)}
+            isPending={isForgotPending}
+            sendEmail={handleForgotPasswordSubmit}
           />
           <FooterForm view={view} />
         </div>

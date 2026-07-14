@@ -1,6 +1,12 @@
 import { SlidersHorizontal } from "lucide-react"
 
-export const Aside = ({categories, selectedCategory}) => {
+interface PropsI {
+  categories : string []
+  selectedCategory : string
+  setSelectedCategory :  React.Dispatch<React.SetStateAction<string>>
+}
+
+export const Aside = ({categories, selectedCategory, setSelectedCategory} : PropsI) => {
   return (
   <aside className="w-60 shrink-0 space-y-6 hidden lg:block">
           <div className="space-y-3">

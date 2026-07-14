@@ -11,6 +11,7 @@ import {
   RefreshCw,
   ShieldCheck,
 } from "lucide-react"
+import type React from "react"
 import type { ChangeEvent, SubmitEventHandler } from "react"
 
 interface PropsI {
@@ -18,11 +19,13 @@ interface PropsI {
   showPassword: boolean
   setView: React.Dispatch<React.SetStateAction<"login" | "forgot" | "reset">>
   setShowPassword: (e: boolean) => void
-  email : string
-  password : string
-  setEmail : (e : ChangeEvent<HTMLInputElement>) => void
-  setPassword : (e : ChangeEvent<HTMLInputElement>) => void
+  email: string
+  password: string
+  setEmail: (e: ChangeEvent<HTMLInputElement>) => void
+  setPassword: (e: ChangeEvent<HTMLInputElement>) => void
   onSubmit: SubmitEventHandler<HTMLFormElement>
+  isPending: boolean
+  sendEmail: SubmitEventHandler<HTMLFormElement>
 }
 
 export const SectionForm = ({
@@ -34,10 +37,21 @@ export const SectionForm = ({
   setEmail,
   password,
   setPassword,
-  onSubmit
+  onSubmit,
+  isPending,
+  sendEmail,
 }: PropsI) => {
+  const handleFomSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (view === "login") {
+      onSubmit(e)
+    } else if (view === "forgot") {
+      sendEmail(e)
+    }
+  }
   return (
-    <form onSubmit={onSubmit} className="space-y-5">
+    <form onSubmit={handleFomSubmit} className="space-y-5">
       {view === "login" && (
         <div className="animate-in space-y-5 duration-300 zoom-in-95 fade-in">
           <div className="space-y-2">
@@ -51,7 +65,6 @@ export const SectionForm = ({
                 placeholder="artisan@mwanambokart.com"
                 value={email}
                 onChange={setEmail}
-
               />
             </div>
           </div>
@@ -64,7 +77,7 @@ export const SectionForm = ({
                 onClick={() => setView("forgot")}
                 className="text-xs font-semibold text-primary underline-offset-4 hover:underline"
               >
-                Oublié ?
+                Mot de passe oublié ?
               </button>
             </div>
             <div className="relative">
@@ -111,16 +124,26 @@ export const SectionForm = ({
                 type="email"
                 className="h-11 pl-10"
                 placeholder="votre@email.com"
+                value={email}
+                onChange={setEmail}
               />
             </div>
           </div>
 
           <Button
-            type="button"
-            onClick={() => setView("reset")}
+            type="submit"
+            disabled={isPending}
+            // onClick={() => setView("reset")}
             className="h-12 w-full text-sm font-bold"
           >
-            Envoyer le lien <RefreshCw className="ml-2 h-4 w-4" />
+            {isPending ? (
+              "Envoi en cours..."
+            ) : (
+              <>
+                Envoyer le lien de récupération
+                <RefreshCw className="h-4 w-4" />
+              </>
+            )}
           </Button>
 
           <button

@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button"
 import { AlertDialogShow } from "@/features/admin/components/artworktype/AlertDialog"
 import { Heart, ShoppingBag } from "lucide-react"
 
-export const Header = ({ onLogout }) => {
+interface Logout {
+  onLogout : () => void
+}
+
+export const Header = ({ onLogout } : Logout) => {
   return (
     <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-zinc-800 bg-zinc-900/80 px-4 backdrop-blur-md sm:px-6 lg:px-8">
       <div className="flex items-center gap-2">
