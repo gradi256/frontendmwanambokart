@@ -2,7 +2,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Grid, List, Search } from "lucide-react"
 
-export const Bar = ({searchTerm, setSearchTerm}) => {
+interface BarProps {
+  searchTerm: string;
+  setSearchTerm: (value: string) => void;
+}
+
+export const Bar = ({searchTerm, setSearchTerm} : BarProps) => {
   return (
     <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
       <div className="relative w-full sm:max-w-md">

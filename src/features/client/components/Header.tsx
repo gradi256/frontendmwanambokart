@@ -13,14 +13,14 @@ export const Header = ({ onLogout } : Logout) => {
         <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary text-sm font-black tracking-tighter text-white">
           <AlertDialogShow
             onConfirm={onLogout}
-            nameBtn={localStorage.getItem("email")?.charAt(0).toUpperCase()}
+            nameBtn={localStorage.getItem("email")?.charAt(0).toUpperCase() || "U"}
             title="Souhaitez-vous vous deconnectier ? "
             desc="description......"
             act="Deconnexion"
           />
         </div>
         <span className="font-heading text-lg font-bold tracking-tight text-white">
-          {/* {localStorage.getItem('email')} */}
+          {localStorage.getItem('email')}
         </span>
       </div>
 

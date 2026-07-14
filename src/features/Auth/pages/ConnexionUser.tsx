@@ -13,6 +13,7 @@ import { ForgotPasswordService } from "../services/ForgotPassword"
 interface userDataI {
   id: string
   role: string
+  email: string
 }
 
 export const ConnexionUser = () => {
@@ -35,6 +36,7 @@ export const ConnexionUser = () => {
       const userData: userDataI = {
         id: servePaylod.userId,
         role: servePaylod.role,
+        email: servePaylod.email || email,
       }
 
       login(servePaylod.accessToken, userData)
