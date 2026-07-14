@@ -1,7 +1,9 @@
-import { useAuthStore } from "@/stores/useAuthStore"
+import { Outlet } from "react-router-dom"
 
 export const ClientLayout = () => {
-  const authState = useAuthStore()
-  console.log("État actuel de mon Store Zustand :", authState)
-  return <div>ClientLayout</div>
+  return (
+    <div>
+      <Outlet />
+    </div>
+  )
 }

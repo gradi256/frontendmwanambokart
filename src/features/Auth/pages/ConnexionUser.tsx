@@ -38,6 +38,7 @@ export const ConnexionUser = () => {
       console.log(servePaylod)
       if (servePaylod.role === "CUSTOMER") {
         navigate("/dashboard/client")
+        localStorage.setItem('email', servePaylod.email)
       } else if (servePaylod.role === "ARTIST") {
         navigate("/dashboard/artisan")
       }

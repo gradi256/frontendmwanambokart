@@ -10,11 +10,13 @@ import { RegisterArtist } from "./features/Auth/pages/RegisterArtist"
 import { ConnexionUser } from "./features/Auth/pages/ConnexionUser"
 import { ClientLayout } from "./features/client/ClientLayout"
 import { ArtistLayout } from "./features/artist/ArtistLayout"
+import { ClientGalleryPortal } from "./features/client/ClientGalleryPortal"
 
 export const router = createBrowserRouter([
   {
     path: "/dashboard/client",
     element: <ClientLayout />,
+    children: [{ index: true, element: <ClientGalleryPortal /> }],
   },
   {
     path: "/dashboard/artisan",
