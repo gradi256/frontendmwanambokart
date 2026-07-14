@@ -12,7 +12,7 @@ import { ForgotPasswordService } from "../services/ForgotPassword"
 
 interface userDataI {
   id: string
-  role: string
+  role: "CUSTOMER" | "ARTIST"
   email: string
 }
 
