@@ -9,8 +9,8 @@ import { RegisterClient } from "./features/Auth/pages/RegisterCient"
 import { RegisterArtist } from "./features/Auth/pages/RegisterArtist"
 import { ConnexionUser } from "./features/Auth/pages/ConnexionUser"
 import { ClientLayout } from "./features/client/ClientLayout"
-import { ArtistLayout } from "./features/artist/ArtistLayout"
 import { ClientGalleryPortal } from "./features/client/ClientGalleryPortal"
+import { SellerDashboard } from "./features/artist/SellerDashboard"
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard/artisan",
-    element: <ArtistLayout />,
+    element: <SellerDashboard />,
   },
   {
     path: "/auth",

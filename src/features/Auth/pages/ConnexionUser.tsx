@@ -40,6 +40,7 @@ export const ConnexionUser = () => {
         navigate("/dashboard/client")
         localStorage.setItem('email', servePaylod.email)
       } else if (servePaylod.role === "ARTIST") {
+        localStorage.setItem('pseudo', servePaylod.pseudo)
         navigate("/dashboard/artisan")
       }
     },
