@@ -1,6 +1,6 @@
 export type AlertDialogType = {
   onConfirm: () => void
-  nameBtn: string
+  nameBtn: string | any
   title: string
   desc: string
   act: string

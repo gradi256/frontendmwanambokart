@@ -1,22 +1,26 @@
 import { useState } from "react"
-import {
-  Search,
-  Heart,
-  MessageSquare,
-  Grid,
-  List,
-  Plus,
-  Compass,
-} from "lucide-react"
 import { Header } from "./components/Header"
 import { Hero } from "./components/Hero"
 import { Aside } from "./components/Aside"
 import { Bar } from "./components/Bar"
 import { SectionPosts } from "./components/SectionPosts"
+import { useAuthStore } from "@/stores/useAuthStore"
+import { useNavigate } from "react-router-dom"
+import { toast } from "sonner"
 
 export const ClientGalleryPortal = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("Tous")
+
+  const logout = useAuthStore((state) => state.logout)
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    await logout()
+    localStorage.removeItem("email")
+    toast.success("Vous avez été deconnecté avec succès !")
+    navigate("/auth/auth-connexion/connexion-user")
+  }
 
   const categories = [
     "Tous",
@@ -64,7 +68,7 @@ export const ClientGalleryPortal = () => {
 
   return (
     <div className="flex min-h-screen flex-col bg-zinc-950 text-zinc-50 antialiased">
-      <Header />
+      <Header onLogout={() => handleLogout()} />
       <Hero />
       <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-8 px-4 py-10 sm:px-6 lg:flex-row lg:px-8">
         <Aside categories={categories} selectedCategory={selectedCategory} />
