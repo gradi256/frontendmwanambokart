@@ -8,8 +8,13 @@ import { HomeRegister } from "./features/Auth/pages/HomeRegister"
 import { RegisterClient } from "./features/Auth/pages/RegisterCient"
 import { RegisterArtist } from "./features/Auth/pages/RegisterArtist"
 import { ConnexionUser } from "./features/Auth/pages/ConnexionUser"
+import { ClientLayout } from "./features/client/ClientLayout"
 
 export const router = createBrowserRouter([
+  {
+    path: "/dashboard/client",
+    element: <ClientLayout />,
+  },
   {
     path: "/auth",
     element: <AuthLayout />,
@@ -27,8 +32,8 @@ export const router = createBrowserRouter([
         element: <RegisterArtist />,
       },
       {
-        path : '/auth/auth-connexion/connexion-user',
-        element : <ConnexionUser />
+        path: "/auth/auth-connexion/connexion-user",
+        element: <ConnexionUser />,
       },
     ],
   },

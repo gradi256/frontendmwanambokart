@@ -11,12 +11,18 @@ import {
   RefreshCw,
   ShieldCheck,
 } from "lucide-react"
+import type { ChangeEvent, SubmitEventHandler } from "react"
 
 interface PropsI {
   view: string
   showPassword: boolean
   setView: React.Dispatch<React.SetStateAction<"login" | "forgot" | "reset">>
   setShowPassword: (e: boolean) => void
+  email : string
+  password : string
+  setEmail : (e : ChangeEvent<HTMLInputElement>) => void
+  setPassword : (e : ChangeEvent<HTMLInputElement>) => void
+  onSubmit: SubmitEventHandler<HTMLFormElement>
 }
 
 export const SectionForm = ({
@@ -24,9 +30,14 @@ export const SectionForm = ({
   setView,
   showPassword,
   setShowPassword,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  onSubmit
 }: PropsI) => {
   return (
-    <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+    <form onSubmit={onSubmit} className="space-y-5">
       {view === "login" && (
         <div className="animate-in space-y-5 duration-300 zoom-in-95 fade-in">
           <div className="space-y-2">
@@ -38,6 +49,9 @@ export const SectionForm = ({
                 type="email"
                 className="h-11 pl-10"
                 placeholder="artisan@mwanambokart.com"
+                value={email}
+                onChange={setEmail}
+
               />
             </div>
           </div>
@@ -60,6 +74,8 @@ export const SectionForm = ({
                 type={showPassword ? "text" : "password"}
                 className="h-11 pr-10 pl-10"
                 placeholder="••••••••"
+                value={password}
+                onChange={setPassword}
               />
               <button
                 type="button"
