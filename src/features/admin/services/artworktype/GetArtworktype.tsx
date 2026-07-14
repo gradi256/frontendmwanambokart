@@ -1,10 +1,9 @@
-import { API_URL } from "@/config/api"
-import axios from "axios"
+import { API } from "@/config/api"
 
 // fonction des récupération
 
 export const getArtworktype = async () => {
-  const response = await axios.get(`${API_URL}/artworktype`)
+  const response = await API.get(`/artworktype`)
   return response.data.data
 }
 

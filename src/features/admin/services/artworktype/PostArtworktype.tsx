@@ -1,9 +1,8 @@
-import { API_URL } from "@/config/api"
-import axios from "axios"
+import { API } from "@/config/api"
 import type { ArtworktypeInput } from "../../types/ArtworktypeType"
 
 export const PostArtworktype = async (artworktypeData: ArtworktypeInput) => {
-  const response = await axios.post(`${API_URL}/artworktype`, {
+  const response = await API.post(`/artworktype`, {
     name: artworktypeData.name,
     description: artworktypeData.description,
   })

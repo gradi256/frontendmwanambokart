@@ -1,6 +1,5 @@
-import { API_URL } from "@/config/api"
-import axios from "axios"
 import type { USerData } from "../types/UserData"
+import { API } from "@/config/api"
 
 export const CreateCostumer = async (userData: USerData) => {
   try {
@@ -11,7 +10,7 @@ export const CreateCostumer = async (userData: USerData) => {
       },
       customerData: userData.customer,
     }
-    const { data } = await axios.post(`${API_URL}/customer`, payload)
+    const { data } = await API.post(`/customer`, payload)
     return data.data
   } catch (error) {
     console.log(error)

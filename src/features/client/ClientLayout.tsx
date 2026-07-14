@@ -1,6 +1,7 @@
+import { useAuthStore } from "@/stores/useAuthStore"
 
 export const ClientLayout = () => {
-  return (
-    <div>ClientLayout</div>
-  )
+  const authState = useAuthStore()
+  console.log("État actuel de mon Store Zustand :", authState)
+  return <div>ClientLayout</div>
 }

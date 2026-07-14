@@ -9,11 +9,16 @@ import { RegisterClient } from "./features/Auth/pages/RegisterCient"
 import { RegisterArtist } from "./features/Auth/pages/RegisterArtist"
 import { ConnexionUser } from "./features/Auth/pages/ConnexionUser"
 import { ClientLayout } from "./features/client/ClientLayout"
+import { ArtistLayout } from "./features/artist/ArtistLayout"
 
 export const router = createBrowserRouter([
   {
     path: "/dashboard/client",
     element: <ClientLayout />,
+  },
+  {
+    path: "/dashboard/artisan",
+    element: <ArtistLayout />,
   },
   {
     path: "/auth",

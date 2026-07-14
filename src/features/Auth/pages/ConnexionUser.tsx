@@ -7,6 +7,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { Login } from "../services/Login"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
+import { useAuthStore } from "@/stores/useAuthStore"
+
 
 export const ConnexionUser = () => {
   const [view, setView] = useState<"login" | "forgot" | "reset">("login")
@@ -14,6 +16,7 @@ export const ConnexionUser = () => {
 
   const queryClient = useQueryClient()
   const navigate = useNavigate()
+  const login = useAuthStore((state) => state.login)
 
   const [email, setEmail] = useState("")
   const [password, setPasworrd] = useState("")
@@ -23,8 +26,20 @@ export const ConnexionUser = () => {
     onSuccess: (servePaylod) => {
       queryClient.invalidateQueries({ queryKey: ["login"] })
       toast.success(servePaylod.message || "Connexion à votre compte réussi !")
+
+
+      const userData  = {
+        id : servePaylod.userId,
+        role : servePaylod.role
+      }
+
+
+      login(servePaylod.accessToken, userData)
+      console.log(servePaylod)
       if (servePaylod.role === "CUSTOMER") {
         navigate("/dashboard/client")
+      } else if (servePaylod.role === "ARTIST") {
+        navigate("/dashboard/artisan")
       }
     },
     onError: (err: any) => {

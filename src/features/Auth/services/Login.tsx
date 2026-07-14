@@ -1,11 +1,10 @@
-import { API_URL } from "@/config/api"
-import axios from "axios"
+import { API } from "@/config/api"
 
 interface userDataI {
   email: string
   password: string
 }
 export const Login = async (userData: userDataI) => {
-  const { data } = await axios.post(`${API_URL}/auth/login`, userData)
+  const { data } = await API.post(`/auth/login`, userData)
   return data
 }

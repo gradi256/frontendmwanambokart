@@ -1,9 +1,9 @@
-import { API_URL } from "@/config/api"
+import { API } from "@/config/api"
 import axios from "axios"
 
 export const CreateArtist = async (formData: FormData) => {
   try {
-    const { data } = await axios.post(`${API_URL}/artist`, formData)
+    const { data } = await API.post(`/artist`, formData)
     return data.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
