@@ -22,7 +22,8 @@ const App = () => {
         )
         const userData = {
           id : response.data.userId,
-          role : response.data.role
+          role : response.data.role,
+          email : response.data.email
         }
         login(response.data.accessToken, userData)
       } catch (err: any) {

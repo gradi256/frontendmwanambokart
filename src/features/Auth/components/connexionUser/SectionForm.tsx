@@ -45,9 +45,9 @@ export const SectionForm = ({
     e.preventDefault()
 
     if (view === "login") {
-      onSubmit(e)
+      onSubmit(e as any)
     } else if (view === "forgot") {
-      sendEmail(e)
+      sendEmail(e as any)
     }
   }
   return (
